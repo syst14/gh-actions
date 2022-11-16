@@ -1,6 +1,6 @@
 ---
 name: Build and Deploy to EKS
-on: [ workflow_dispatch ]
+on: [ workflow_dispatch, push ]
 
 jobs:
   jenkins_canary_deploy:
