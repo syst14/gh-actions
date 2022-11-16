@@ -11,8 +11,8 @@ kubectl: ## Pin the version for kubectl
 	curl -LO https://dl.k8s.io/release/v1.23.6/bin/linux/amd64/kubectl && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s cluster namespace
-    /bin/bash --version
-    bash -c "bash --version"
+	/bin/bash --version
+	bash -c "bash --version"
 	/usr/local/bin/kubectl version --client
 	whereis git
 	number=1 ; while [ $$number -le 12 ] ; do \
