@@ -10,6 +10,7 @@ clean: ## Clean up any built resources
 kubectl: ## Pin the version for kubectl
 	curl -LO https://dl.k8s.io/release/v1.23.6/bin/linux/amd64/kubectl && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
+pod := $(shell cat /tmp/status)
 deploy_stage: SHELL:=/bin/bash
 deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s cluster namespace
 	@echo "deploy_stage is $$0"
@@ -18,7 +19,7 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 		echo $$number ; \
 		sleep 2 ; \
 		echo "EcTrue" > /tmp/status ; \
-		cmd=$(shell cat /tmp/status) ; \
+		cmd=$(pod) ; \
 		echo "NEXT CMD VAR" ; \
 		echo $$cmd ; \
 		cmd="" ; \
