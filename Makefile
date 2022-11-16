@@ -17,10 +17,11 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 	number=1 ; while [ $$number -le 12 ] ; do \
 		echo $$number ; \
 		sleep 2 ; \
-		cmd=$(shell echo True) ; \
-		$(eval cmd=$(shell bash -c "echo True")) ; \
+		/usr/local/bin/kubectl version --client > status ; \
+		cat status ; \
+		cmd=$(shell cat status) ; \
 		echo $$cmd ; \
-		if [ $$cmd = "True" ]; then echo "Pod is ready"; break; fi ; \
+		if [[ $$cmd = "True" ]]; then echo "Pod is ready"; break; fi ; \
 		if [ $$number -eq 4 ]; then echo "Pod awaiting timeout" ; \
 			/usr/local/bin/kubectl version --client; exit 1; fi ; \
 		let number++ ; \
