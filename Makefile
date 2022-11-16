@@ -18,6 +18,8 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 		echo $$number ; \
 		/usr/local/bin/kubectl config get-contexts ; \
 		/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig -n jenkins-stage get pods -l app=jenkins-stage -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}' ; \
+		$(shell /usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig -n jenkins-stage get pods -l app=jenkins-stage -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') ; \
+		echo "done debug" ; \
 		sleep 2 ; \
 		cmd=$(shell echo True) ; \
 		cmd=$(shell /usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig -n jenkins-stage get pods -l app=jenkins-stage -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') ; \
