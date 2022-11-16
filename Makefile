@@ -23,6 +23,7 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 			/usr/local/bin/kubectl version --client; exit 1; fi ; \
 		let number++ ; \
 	done ; \
+	echo "post action"
 	/usr/local/bin/kubectl version --client
 
 # Cute hack thanks to:
