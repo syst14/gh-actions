@@ -15,7 +15,7 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 	@echo "deploy_stage is $$0"
 	/usr/local/bin/kubectl version --client
 	number=1 ; while [ $$number -le 12 ] ; do \
-		echo $$number
+		echo $$number ; \
 		sleep 2 ; \
 		cmd=$(shell echo True) ; \
 		if [ $$cmd = "True2" ]; then echo "Pod is ready"; break; fi ; \
