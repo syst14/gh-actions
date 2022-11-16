@@ -20,7 +20,7 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 		sleep 2 ; \
 		cmd=$(shell echo True) ; \
 		cmd=$(shell /usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig -n jenkins-stage get pods -l app=jenkins-stage -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}') ; \
-		cmd=$(shell /usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig -n jenkins-stage get pods -l app=jenkins-stage -o 'jsonpath={..status.conditions[?(@.type=="Ready")].status}' || False) ; \
+		cmd=$(shell /usr/local/bin/kubectl config get-contexts) ; \
 		if [ $$cmd = "True" ]; then echo "Pod is ready"; break; fi ; \
 		if [ $$number -eq 4 ]; then echo "Pod awaiting timeout" ; \
 			/usr/local/bin/kubectl version --client; exit 1; fi ; \
