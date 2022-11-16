@@ -26,6 +26,10 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 	echo "post action"
 	/usr/local/bin/kubectl version --client
 
+deploy_script: kubectl
+	echo "start"
+	$(shell ./script.sh)
+
 # Cute hack thanks to:
 # https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Display this help text

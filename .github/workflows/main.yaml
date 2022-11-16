@@ -12,4 +12,4 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: "key"
           AWS_SECRET_ACCESS_KEY: "secret"
-        run: make deploy_stage K8S_CLUSTER_NAME="tools-jenkins-cluster" AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+        run: make deploy_script K8S_CLUSTER_NAME="tools-jenkins-cluster" AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
