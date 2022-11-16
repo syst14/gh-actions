@@ -1,0 +1,15 @@
+---
+name: Build and Deploy to EKS
+on: [ workflow_dispatch ]
+
+jobs:
+  jenkins_canary_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v2
+      - name: Applies k8s manifest files to tools-jenkins EKS cluster (if on main branch)
+        env:
+          AWS_ACCESS_KEY_ID: "key"
+          AWS_SECRET_ACCESS_KEY: "secret"
+        run: make deploy_stage K8S_CLUSTER_NAME="tools-jenkins-cluster" AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
