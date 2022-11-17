@@ -41,6 +41,13 @@ test: kubectl
 	echo "post action"
 	/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig -n jenkins get svc
 
+last: kubectl
+	/usr/local/bin/aws eks --region us-east-2 update-kubeconfig --name $(K8S_CLUSTER_NAME) --kubeconfig jenkins_kubeconfig
+	bash -c "./pod_check.sh jenkins_kubeconfig"
+
+
+local:
+	bash -c "./pod_check.sh ~/jenkins_tmp"
 
 deploy_script: kubectl
 	echo "start"
