@@ -28,7 +28,7 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 
 test: SHELL:=/bin/bash
 test: kubectl
-	$(shell aws eks --region us-east-2 update-kubeconfig --name tools-jenkins-cluster --kubeconfig jenkins_kubeconfig)
+	$(shell aws eks --region us-east-2 update-kubeconfig --name tools-jenkins-cluster --kubeconfig jenkins_kubeconfig) ; \
 	/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig get namespaces
 	number=1 ; while [ $$number -le 2 ] ; do \
 		sleep 1 ; \
