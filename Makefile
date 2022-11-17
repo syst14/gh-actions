@@ -33,10 +33,11 @@ test: kubectl
 	number=1 ; while [ $$number -le 2 ] ; do \
 		sleep 1 ; \
 		cmd=$(shell echo True) ; \
+		cmd=$(shell /usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig get namespaces) ; \
 		echo $$cmd ; \
 		let number++ ; \
 	done ; \
-	/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig delete -f k8s/staging/deployment.yaml
+	echo "post action"
 
 
 deploy_script: kubectl
