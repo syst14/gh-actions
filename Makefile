@@ -26,6 +26,19 @@ deploy_stage: kubectl ## Deploy canary staging Jenkins pod to the separate K8s c
 	echo "post action"
 	/usr/local/bin/kubectl version --client
 
+test: SHELL:=/bin/bash
+test: kubectl
+	aws eks --region us-east-2 update-kubeconfig --name tools-jenkins-cluster --kubeconfig jenkins_kubeconfig
+	/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig get namespaces
+	number=1 ; while [ $$number -le 2 ] ; do \
+		sleep 1 ; \
+		cmd=$(shell echo True) ; \
+		echo $$cmd ; \
+		let number++ ; \
+	done ; \
+	/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig delete -f k8s/staging/deployment.yaml
+
+
 deploy_script: kubectl
 	echo "start"
 	$(shell ./script.sh)
