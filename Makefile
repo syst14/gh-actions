@@ -32,7 +32,7 @@ test: kubectl
 	/usr/local/bin/kubectl --kubeconfig jenkins_kubeconfig get namespaces
 	number=1 ; while [ $$number -le 2 ] ; do \
 		sleep 1 ; \
-		cmd=$(shell pwd) ; \
+		cmd=$(shell /usr/local/bin/kubectl --kubeconfig ./jenkins_kubeconfig get namespaces) ; \
 		echo $$cmd ; \
 		let number++ ; \
 	done ; \
