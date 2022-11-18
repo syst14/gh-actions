@@ -45,6 +45,9 @@ last: kubectl
 	/usr/local/bin/aws eks --region us-east-2 update-kubeconfig --name $(K8S_CLUSTER_NAME) --kubeconfig jenkins_kubeconfig
 	bash -c "./pod_check.sh jenkins_kubeconfig jenkins"
 
+script:
+	bash -c "./pod_check.sh jenkins_kubeconfig jenkins"
+
 
 local:
 	bash -c "./pod_check.sh ~/jenkins_tmp jenkins"

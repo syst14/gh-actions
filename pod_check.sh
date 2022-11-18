@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pwd
+ls -la
 number=1
 while [[ $number -le 12 ]]
 do
