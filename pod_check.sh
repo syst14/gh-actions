@@ -11,7 +11,7 @@ do
   echo "kubectl pod status output: $cmd"
   if [[ $cmd = "True" ]]; then echo "Pod is ready"; break; fi
   if [[ $number -eq 4 ]]; then echo "Pod awaiting timeout"; \
-    kubectl version --client; exit 1; fi
+    ls k8s; kubectl version --client; exit 1; fi
   let number++
 done
 
